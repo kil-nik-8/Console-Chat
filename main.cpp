@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include "User.h"
 #include "PrivateChat.h"
 #include "PublicChat.h"
@@ -115,7 +116,6 @@ int main()
 		
 		if (input != 'q' && access)														// В случае успешной авторизации или регистрации
 		{
-
 			access = true;
 			do
 			{
@@ -151,7 +151,7 @@ int main()
 					}
 
 					cout << "Choose chat: ";											
-					cin >> chatID;														// Выбор чата по его ID
+					cin >> chatID;															// Выбор чата по его ID
 					message = "";
 					if (chatID == 0)
 					{
@@ -163,10 +163,10 @@ int main()
 							cout << "---------------------------------------------------------------" << endl;
 							publicChat.showChat();											// Вывод всех сообщений из данного чата на консоль
 							cout << "Message: ";
-							cin >> message;													// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
+							getline(cin, message);											// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
 							if (message != "CLOSE")
 							{
-								publicChat.addMessage(message, index);						// Отправка сообщения в чат, закрепление его в данном чате
+								publicChat.addMessage(message, users[index].getID());		// Отправка сообщения в чат, закрепление его в данном чате
 							}
 						}
 					}
@@ -197,38 +197,39 @@ int main()
 							cout << "---------------------------------------------------------------" << endl;
 							chats[chatID - 1].showChat();									// Вывод всех сообщений из данного чата на консоль
 							cout << "Message: ";
-							cin >> message;													// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
+							getline(cin, message);											// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
 							if (message != "CLOSE")
 							{
-								chats[chatID - 1].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
+								chats[chatID - 1].addMessage(message, users[index].getID());		// Отправка сообщения в чат, закрепление его в данном чате
 							}
 						}
 					}
 					break;
 
-				case 2:																	// СОЗДАНИЕ НОВОГО ПРИВАТНОГО ЧАТА
+				case 2:																		// СОЗДАНИЕ НОВОГО ПРИВАТНОГО ЧАТА
 					cout << "Enter user ID: " << endl;
-					cin >> userID;														// Вводим ID пользователя, кому хотим написать
-					for (i = 0; i < users.size(); i++)									// Проходим по всем пользователям
+					cin >> userID;															// Вводим ID пользователя, кому хотим написать
+					for (i = 0; i < users.size(); i++)										// Проходим по всем пользователям
 					{
-						if (users[i].getID() == userID)									// Проверка на существования пользователя с таким ID
+						if (users[i].getID() == userID)										// Проверка на существования пользователя с таким ID
 						{
-							system("cls");												// Очистка экрана консоли					
-							chatick.setUserID1(users[index].getID());					// Создание нового элемента класса чатов 
+							system("cls");													// Очистка экрана консоли					
+							chatick.setUserID1(users[index].getID());						// Создание нового элемента класса чатов 
 							chatick.setUserID2(userID);
 							chatick.setChatID(CHAT_ID);
-							chatID = CHAT_ID;											// Получаем ID чата с пользователем, у которого ID - UserID
+							chatID = CHAT_ID;												// Получаем ID чата с пользователем, у которого ID - UserID
 							CHAT_ID++;
 							chats.push_back(chatick);
 							cout << "Message: ";
-							cin >> message;												// Ввод сообщения
-							chats[chatID - 1].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
+							message = "";
+							getline(cin, message);											// Ввод сообщения
+							chats[chatID - 1].addMessage(message, users[index].getID());					// Отправка сообщения в чат, закрепление его в данном чате
 						}
 					}
 					break;
 
 				default:
-					cout << "Incorrect data." << endl;									// Выводим сообщение, если введенные данные не соответствуют предложенным опциям. Процесс выбора чата начинается заново
+					cout << "Incorrect data." << endl;										// Выводим сообщение, если введенные данные не соответствуют предложенным опциям. Процесс выбора чата начинается заново
 				}
 			} while (access);
 			

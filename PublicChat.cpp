@@ -5,7 +5,10 @@ PublicChat::PublicChat() : _chatID(0), _messages("") {}
 
 void PublicChat::showChat()
 {
-	std::cout << _messages << endl;
+	if (_messages.size() > 0 && _messages[_messages.size() - 3] != ':')
+		std::cout << _messages << endl;
+	else
+		_messages = "";
 }
 
 void PublicChat::addMessage(string message, int userID)
