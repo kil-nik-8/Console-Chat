@@ -23,7 +23,6 @@ int main()
 	PublicChat publicChat;
 	PrivateChat chatick;
 
-
 	bool access = false;
 
 	do
@@ -124,7 +123,6 @@ int main()
 				cout << "0 - exit" << endl;												// Выход
 				cout << "1 - to choose chat" << endl;									// Выбор существующих чатов
 				cout << "2 - to start new chat" << endl;								// Создать новый приватный чат
-				cout << "4 - change user" << endl;
 				
 				cin >> a;																// Выбираем нужную опцию
 				switch (a)
@@ -140,7 +138,7 @@ int main()
 
 				case 1:																	// ВЫБОР ЧАТА
 					cout << "0 - public chat" << endl;									// Вывод на консоль всех существующих чатов (сначала общий) совместно с их ID и количеством непрочитанных сообщений
-					for (i = 1; i < chats.size(); i++)									
+					for (i = 0; i < chats.size(); i++)									
 					{
 						if (chats[i].getUserID1() == users[index].getID())
 						{
@@ -155,35 +153,55 @@ int main()
 					cout << "Choose chat: ";											
 					cin >> chatID;														// Выбор чата по его ID
 					message = "";
-					for (i = 0; i < chats.size(); i++)
+					if (chatID == 0)
 					{
-						/*if (chats[i].getChatID() == chatID && chats[i].getUserID1() == users[index].getID())
+						message = "";
+						while (message != "CLOSE")											// Пока пользователь не напишет "CLOSE", чат не закроется
 						{
-							receiverID = chats[i].getUserID2();
-						}
-						else if (chats[i].getChatID() == chatID && chats[i].getUserID2() == users[index].getID())
-						{
-							receiverID = chats[i].getUserID1();
-						}*/
-						if (!(chats[i].getChatID() == chatID && (chats[i].getUserID1() == users[index].getID()|| chats[i].getUserID2() == users[index].getID())))
-						{
-							cout << "Incorrect data." << endl;
-							message = "CLOSE";
-							system("pause");
+							system("cls");													// Очистка экрана консоли
+							cout << "CLOSE - close chat" << endl;							// Постоянный вывод напоминания, какое слово нужно ввести для выхода из чата
+							cout << "---------------------------------------------------------------" << endl;
+							publicChat.showChat();											// Вывод всех сообщений из данного чата на консоль
+							cout << "Message: ";
+							cin >> message;													// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
+							if (message != "CLOSE")
+							{
+								publicChat.addMessage(message, index);						// Отправка сообщения в чат, закрепление его в данном чате
+							}
 						}
 					}
-					
-					while (message != "CLOSE")											// Пока пользователь не напишет "CLOSE", чат не закроется
+					else
 					{
-						system("cls");													// Очистка экрана консоли
-						cout << "CLOSE - close chat" << endl;							// Постоянный вывод напоминания, какое слово нужно ввести для выхода из чата
-						cout << "---------------------------------------------------------------" << endl;
-						chats[chatID].showChat();										// Вывод всех сообщений из данного чата на консоль
-						cout << "Message: ";
-						cin >> message;													// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
-						if (message != "CLOSE")
+						for (i = 0; i < chats.size(); i++)
 						{
-							chats[chatID].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
+							/*if (chats[i].getChatID() == chatID && chats[i].getUserID1() == users[index].getID())
+							{
+								receiverID = chats[i].getUserID2();
+							}
+							else if (chats[i].getChatID() == chatID && chats[i].getUserID2() == users[index].getID())
+							{
+								receiverID = chats[i].getUserID1();
+							}*/
+							if (!(chats[i].getChatID() == chatID && (chats[i].getUserID1() == users[index].getID() || chats[i].getUserID2() == users[index].getID())))
+							{
+								cout << "Incorrect data." << endl;
+								message = "CLOSE";
+								system("pause");
+							}
+						}
+
+						while (message != "CLOSE")											// Пока пользователь не напишет "CLOSE", чат не закроется
+						{
+							system("cls");													// Очистка экрана консоли
+							cout << "CLOSE - close chat" << endl;							// Постоянный вывод напоминания, какое слово нужно ввести для выхода из чата
+							cout << "---------------------------------------------------------------" << endl;
+							chats[chatID - 1].showChat();									// Вывод всех сообщений из данного чата на консоль
+							cout << "Message: ";
+							cin >> message;													// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
+							if (message != "CLOSE")
+							{
+								chats[chatID - 1].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
+							}
 						}
 					}
 					break;
@@ -204,7 +222,7 @@ int main()
 							chats.push_back(chatick);
 							cout << "Message: ";
 							cin >> message;												// Ввод сообщения
-							chats[chatID].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
+							chats[chatID - 1].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
 						}
 					}
 					break;
