@@ -1,21 +1,29 @@
 #include <iostream>
 #include <vector>
 #include "User.h"
-#include "Message.h"
+#include "PrivateChat.h"
+#include "PublicChat.h"
 
 using namespace std;
 
 int ID_Number;																			// Глобальная переменная, определяющая ID следующего нового пользователя
+int CHAT_ID;
 
 int main()
 {
 	ID_Number = 1;																		// Следующий пользователь будет первым
+	CHAT_ID = 1;
 	char input;
 	int a = -1, userID = 0, i, index, chatID = 0, b = -1;
+	int receiverID = 0;
 	string message = "", login, password;
 	vector<User> users;																	// Контейнер для всех пользователей
 	User user;																			// Вспомогательная переменная типа класса пользователей
-	vector<Message> chats;
+	vector<PrivateChat> chats;
+	PublicChat publicChat;
+	PrivateChat chatick;
+
+
 	bool access = false;
 
 	do
@@ -108,6 +116,7 @@ int main()
 		
 		if (input != 'q' && access)														// В случае успешной авторизации или регистрации
 		{
+
 			access = true;
 			do
 			{
@@ -130,22 +139,51 @@ int main()
 					break;
 
 				case 1:																	// ВЫБОР ЧАТА
-					users[index].getChatList();											// Вывод на консоль всех существующих чатов (сначала общий) совместно с их ID и количеством непрочитанных сообщений
+					cout << "0 - public chat" << endl;									// Вывод на консоль всех существующих чатов (сначала общий) совместно с их ID и количеством непрочитанных сообщений
+					for (i = 1; i < chats.size(); i++)									
+					{
+						if (chats[i].getUserID1() == users[index].getID())
+						{
+							cout << chats[i].getChatID() << "  - chat with user " << chats[i].getUserID2() << endl;
+						}
+						else if (chats[i].getUserID2() == users[index].getID())
+						{
+							cout << chats[i].getChatID() << "  - chat with user " << chats[i].getUserID1() << endl;
+						}
+					}
+
 					cout << "Choose chat: ";											
 					cin >> chatID;														// Выбор чата по его ID
 					message = "";
+					for (i = 0; i < chats.size(); i++)
+					{
+						/*if (chats[i].getChatID() == chatID && chats[i].getUserID1() == users[index].getID())
+						{
+							receiverID = chats[i].getUserID2();
+						}
+						else if (chats[i].getChatID() == chatID && chats[i].getUserID2() == users[index].getID())
+						{
+							receiverID = chats[i].getUserID1();
+						}*/
+						if (!(chats[i].getChatID() == chatID && (chats[i].getUserID1() == users[index].getID()|| chats[i].getUserID2() == users[index].getID())))
+						{
+							cout << "Incorrect data." << endl;
+							message = "CLOSE";
+							system("pause");
+						}
+					}
+					
 					while (message != "CLOSE")											// Пока пользователь не напишет "CLOSE", чат не закроется
 					{
 						system("cls");													// Очистка экрана консоли
 						cout << "CLOSE - close chat" << endl;							// Постоянный вывод напоминания, какое слово нужно ввести для выхода из чата
 						cout << "---------------------------------------------------------------" << endl;
-						users[index].showChat(chatID);									// Вывод всех сообщений из данного чата на консоль
+						chats[chatID].showChat();										// Вывод всех сообщений из данного чата на консоль
 						cout << "Message: ";
 						cin >> message;													// Ввод сообщения, либо "CLOSE", чтобы закрыть данный чат
 						if (message != "CLOSE")
 						{
-							message += "\n";
-							users[index].sendMessage(chatID, message);					// Отправка сообщения в чат, закрепление его в данном чате
+							chats[chatID].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
 						}
 					}
 					break;
@@ -157,21 +195,16 @@ int main()
 					{
 						if (users[i].getID() == userID)									// Проверка на существования пользователя с таким ID
 						{
-							system("cls");												// Очистка экрана консоли
-							users[index].startChatWith(userID);							// Создание нового элемента класса чатов 
-							{
-								Message AB;
-								AB._senderID = users[index].getID();
-								AB._addressID = userID;
-								-----
-									users[index].addChat(AB);
-								users[userID].addChat(AB);
-								
-							}
-							chatID = (users[index]._chats).getChatID(userID);			// Получаем ID чата с пользователем, у которого ID - UserID
+							system("cls");												// Очистка экрана консоли					
+							chatick.setUserID1(users[index].getID());					// Создание нового элемента класса чатов 
+							chatick.setUserID2(userID);
+							chatick.setChatID(CHAT_ID);
+							chatID = CHAT_ID;											// Получаем ID чата с пользователем, у которого ID - UserID
+							CHAT_ID++;
+							chats.push_back(chatick);
 							cout << "Message: ";
 							cin >> message;												// Ввод сообщения
-							users[index].sendMessage(chatID, message);					// Отправка сообщения в чат, закрепление его в данном чате
+							chats[chatID].addMessage(message, index);					// Отправка сообщения в чат, закрепление его в данном чате
 						}
 					}
 					break;

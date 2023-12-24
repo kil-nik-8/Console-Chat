@@ -4,7 +4,7 @@ User::User() : _userid(0), _login(""), _password("")
 {
 }
 
-User::User(string LogIn, string pass) :_login(LogIn), _password(pass)
+User::User(string login, string pass) :_login(login), _password(pass)
 {
 	
 }
@@ -38,20 +38,4 @@ string User::getPassword()
 int User::getID() const
 {
 	return _userid;
-}
-
-void User::addChat(Message x)
-{
-	_chats.push_back(x);
-}
-
-void sendMessage(int chatID, string message)
-{
-	for (int i = 0; i < _chats.size(); i++)
-	{
-		if (_chats[i].getChatID() == chatID)
-		{
-			_chats[i].
-		}
-	}
 }

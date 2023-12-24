@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Message.h"
+#include "PublicChat.h"
 using namespace std;
 
 class User
@@ -9,7 +9,6 @@ class User
 	int _userid;
 	string _login;
 	string _password;
-	//vector<Message> _chats;
 
 public:
 	User();
@@ -20,6 +19,4 @@ public:
 	string getLogin();
 	string getPassword();
 	int getID() const;
-	void addChat(Message);
-	//void sendMessage(int, string);
 };
