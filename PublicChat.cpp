@@ -7,13 +7,12 @@ void PublicChat::showChat()
 {
 	if (_messages.size() > 0 && _messages[_messages.size() - 3] != ':')
 		std::cout << _messages << endl;
-	else
-		_messages = "";
 }
 
-void PublicChat::addMessage(string message, int userID)
+void PublicChat::addMessage(string message, string username)
 {
-	_messages += to_string(userID) + ": " + message + "\n";
+	if (message.size() > 0)
+	_messages += username + ": " + message + "\n";
 }
 
 int PublicChat::getChatID() const

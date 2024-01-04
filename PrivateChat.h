@@ -26,6 +26,8 @@ public:
 	void setUserID2(int);
 	int getUserID2() const;
 
+	bool isUserIn(int);
+
 	//void addMessage(string, int);
 	//void showChat() override; 
 

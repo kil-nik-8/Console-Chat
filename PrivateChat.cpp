@@ -36,6 +36,14 @@ int PrivateChat::getUserID2() const
 	return _userID2;
 }
 
+bool PrivateChat::isUserIn(int userid)
+{
+	if (userid == _userID1 || userid == _userID2)
+		return true;
+	else
+		return false;
+}
+
 /*void PrivateChat::addMessage(string message, int userID)
 {
 	_messages += to_string(userID) + ": " + message + "\n";

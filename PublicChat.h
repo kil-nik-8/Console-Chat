@@ -9,7 +9,7 @@ public:
 	PublicChat(); // Конструктор
 	~PublicChat() = default; // Деструктор
 	void showChat(); // Вывод сообщений чата на экран консоли
-	void addMessage(string, int); // добавление сообщения в чат
+	void addMessage(string, string); // добавление сообщения в чат
 	int getChatID() const;
 
 private:
