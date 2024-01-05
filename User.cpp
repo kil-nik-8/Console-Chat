@@ -1,37 +1,34 @@
 #include "User.h"
 
-User::User() : _userid(0), _login(""), _password("")
+User::User() : _userid(-1), _login(""), _password(""), _username("")
 {
 }
 
-User::User(string LogIn, string pass) :_login(LogIn), _password(pass)
+User::User(int userid, string login, string pass, string username) : _userid(userid), _login(login), _password(pass), _username(username)
 {
 	
 }
 
-string User::setLogin(string login)
+void User::setLogin(string login)
 {
 	_login = login;
-	return _login;
-
 }
-string User::setPassword(string password)
+
+void User::setPassword(string password)
 {
 	_password = password;
-	return _password;
 }
 
-int User::setID(int ID_Number)
+void User::setID(int ID_Number)
 {
 	_userid = ID_Number;
-	return -1;
 }
 
-string User::getLogin()
+string User::getLogin() const
 {
 	return _login;
 }
-string User::getPassword()
+string User::getPassword() const
 {
 	return _password;
 }
@@ -40,18 +37,20 @@ int User::getID() const
 	return _userid;
 }
 
-void User::addChat(Message x)
+void User::setName(string name)
 {
-	_chats.push_back(x);
+	_username = name;
 }
 
-void sendMessage(int chatID, string message)
+string User::getName() const
 {
-	for (int i = 0; i < _chats.size(); i++)
-	{
-		if (_chats[i].getChatID() == chatID)
-		{
-			_chats[i].
-		}
-	}
+	return _username;
+}
+
+void User::erase()
+{
+	_userid = -1;
+	_login = "";
+	_username = "";
+	_password = "";
 }

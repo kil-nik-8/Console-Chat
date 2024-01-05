@@ -1,14 +1,32 @@
 #include "PublicChat.h"
 #include <string>
 
-PublicChat::PublicChat() : _userCount(0), _messages("") {}
+PublicChat::PublicChat() : _chatID(0), _messages("") {}
 
 void PublicChat::showChat()
 {
-	std::cout << _messages << endl;
+	if (_messages.size() > 0 && _messages[_messages.size() - 3] != ':')
+		std::cout << _messages << endl;
 }
 
-void PublicChat::addMessage(string message, int userID)
+void PublicChat::addMessage(string message, string username)
 {
-	_messages += to_string(userID) + ": " + message + "\n";
+	if (message.size() > 0)
+	_messages += username + ": " + message + "\n";
+}
+
+int PublicChat::getChatID() const
+{
+	return _chatID;
+}
+
+void PublicChat::SetMessages(string message)
+{
+	if (message.size() > 0)
+	_messages += message + "\n";
+}
+
+string PublicChat::GetMessages() const
+{
+	return _messages;
 }
