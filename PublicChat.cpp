@@ -1,7 +1,7 @@
 #include "PublicChat.h"
 #include <string>
 
-PublicChat::PublicChat() : _chatID(0), _messages("") {}
+PublicChat::PublicChat() : _messages("") {}
 
 void PublicChat::showChat()
 {
@@ -15,18 +15,8 @@ void PublicChat::addMessage(string message, string username)
 	_messages += username + ": " + message + "\n";
 }
 
-int PublicChat::getChatID() const
-{
-	return _chatID;
-}
-
 void PublicChat::SetMessages(string message)
 {
 	if (message.size() > 0)
 	_messages += message + "\n";
-}
-
-string PublicChat::GetMessages() const
-{
-	return _messages;
 }

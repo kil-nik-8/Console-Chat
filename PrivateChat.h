@@ -30,5 +30,5 @@ public:
 	bool isUserIn(int); // ѕроверка, есть ли пользователь в данном чате с таким ID
 	void erase();		// ќчистка полей класса
 	void showChat();	// ¬ывод сообщений на консоль
-	void addMessage(string, string); // добавление сообщени€ в чат
+	void addMessage(string, string); // ƒобавление сообщени€ в чат
 };
