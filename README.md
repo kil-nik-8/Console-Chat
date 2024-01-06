@@ -11,11 +11,11 @@
 
 Тип данных общего чата.
 Внутри себя имеет поле:
- 	 - string _messages — все сообщения чата.
+- string _messages — все сообщения чата.
 А также методы:
-	- void SetMessages(string x) — добавление строчки x в _messages;
-	- void showChat() — вывод всех сообщений чата на экран консоли;
-	- void addMessage(string x, string y) — добавление в _messages строчки x от пользователя с никнеймом y.
+- void SetMessages(string x) — добавление строчки x в _messages;
+- void showChat() — вывод всех сообщений чата на экран консоли;
+- void addMessage(string x, string y) — добавление в _messages строчки x от пользователя с никнеймом y.
 * PrivateChat
   Тип данных приватного чата.
   Внутри себя имеет поля:
