@@ -72,7 +72,7 @@
 # Распределение обязанностей
 
 Кильдюшев Никита:
-- Написание main() и классов PublicChat PrivateChat;
+- Написание main() и классов PublicChat и PrivateChat;
 - Написание readme.
   
 Ковальчук Никита:
