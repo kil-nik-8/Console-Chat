@@ -9,12 +9,12 @@
 
 * PublicChat
 
-Тип данных общего чата.
+  Тип данных общего чата.
 
-Внутри себя имеет поле:
+  Внутри себя имеет поле:
 	- string _messages — все сообщения чата.
 
-А также методы:
+  А также методы:
 	- void SetMessages(string x) — добавление строчки x в _messages;
 	- void showChat() — вывод всех сообщений чата на экран консоли;
 	- void addMessage(string x, string y) — добавление в _messages строчки x от пользователя с никнеймом y.
@@ -30,8 +30,7 @@
 	- string _messages — все сообщения чата.
 
   А также методы:
-
-  - void setChatID(int x) — устанавливает в поле _chatID значение x;
+  	- void setChatID(int x) — устанавливает в поле _chatID значение x;
 	- int getChatID() const — возвращает значение _chatID;
 	- void setUserID1(int x) — устанавливает в поле _userID1 значение x;
 	- int getUserID1() const — возвращает значение _userID1;
@@ -42,6 +41,7 @@
 	- void erase() — очистка полей класса;
 	- void showChat() — вывод сообщений на консоль;
 	- void addMessage(string, string) — добавление сообщения в чат.
+
 * User
 
   Тип данных пользователей.
