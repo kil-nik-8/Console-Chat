@@ -6,27 +6,47 @@
 
 # Пользовательские типы данных
 Для реализации Консольного Чата созданы следующие пользователские типы данных:
-* Chat
-  Тип данных чатов (общего и приватных).
-  Внутри себя имеет поля:
-  - int _ID – ID номер чата;
-  - vector<vector<string>> _messages - вектор из векторов сообщений каждого чата.
+* PublicChat
+  Тип данных общего чата.
+  Внутри себя имеет поле:
+  - string _messages — все сообщения чата.
   А также методы:
-  
+	- void SetMessages(string x) — добавление строчки x в _messages;
+	- void showChat() — вывод всех сообщений чата на экран консоли;
+	- void addMessage(string x, string y) — добавление в _messages строчки x от пользователя с никнеймом y.
+* PrivateChat
+  Тип данных приватного чата.
+  Внутри себя имеет поля:
+  - int _userID1 — ID первого пользователя в чате;
+	- int _userID2 — ID второго пользователя в чате;
+	- int _chatID — ID чата;
+	- string _messages — все сообщения чата.
+  А также методы:
+  - void setChatID(int x) — устанавливает в поле _chatID значение x;
+	- int getChatID() const — возвращает значение _chatID;
+	- void setUserID1(int x) — устанавливает в поле _userID1 значение x;
+	- int getUserID1() const — возвращает значение _userID1;
+	- void setUserID2(int x) — устанавливает в поле _userID2 значение x;
+	- int getUserID2() const — возвращает значение _userID2;
+	- void SetMessages(string x) — добавляет в поле _messages строчку x;
+	- bool isUserIn(int) — проверка, есть ли пользователь в данном чате с таким ID;
+	- void erase() — очистка полей класса;
+	- void showChat() — вывод сообщений на консоль;
+	- void addMessage(string, string) — добавление сообщения в чат.
 * User
   Тип данных пользователей.
   Внутри себя имеет поля:
-  - string _login - логин пользователя;
-  - string _password - пароль пользователя;
-  - vector<Chat> _chats - вектор из чатов, в которых состоит конкретный пользователь (по умолчанию есть хотя бы один - общий).
+  - int _userid — ID пользователя;
+  - string _login — логин пользователя;
+  - string _password — пароль пользователя;
+  - string _username — никнейм пользователя;
   И методы:
-  - getLogIn() - возвращает логин данного пользователя;
-  - setLogIn(string x) - устанавливает в поле _login значение переменной x;
-  - getPassword() - возвращает пароль данного пользователя;
-  - setPassword(string x) - устанавливает в поле _password значение переменной x;
-  - getID() - возвращает ID-номер данного пользователя;
-  - setID(int id) - устанавливает в поле _ID значение переменной id;
-  - getChatList() - возвращает элемент типа string - информация о доступных пользователю чатах и количестве непрочитанных сообщениях в каждом;
-  - showChat(int chat_id) - выводит на консоль все сообщения чата с ID-номером, равным chat_id;
-  - sendMessage(int chat_id, string x) - отправляет сообщение x в чат с ID-номером, равным chat_id;
-  - startChatWith(int user_id) - создает новый приватный чат с пользователем с ID-номером, равным user_id;
+  - void setLogin(string x) — устанавливает строчку x в поле _login;
+	- void setPassword(string x) — устанавливает строчку x в поле _password;
+	- void setID(int x) — устанавливает строчку x в поле _userid;
+	- void setName(string x) — устанавливает строчку x в поле _username;
+	- string getLogin() const — возвращает значение _login;
+	- string getPassword() const — возвращает значение _password;
+	- string getName() const — возвращает значение _username;
+	- int getID() const — возвращает значение _userid;
+	- void erase() — очистка полей класса;
